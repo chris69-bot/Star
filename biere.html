@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nos Bières | STAR Madagascar</title>
+  <meta name="description" content="Nos Bières STAR Madagascar : Grand format — l&#x27;excellence brassicole malgache. Retrouvez les formats et les prix.">
+  <meta name="theme-color" content="#0b6b3a">
+  <link rel="icon" href="logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* ==========================================================================
+   GROUPE STAR MADAGASCAR — Feuille de style principale
+   Mise en page : Flexbox uniquement · Approche mobile-first
+   ========================================================================== */
+
+/* ---------- 1. Variables ---------- */
+:root {
+  --red: #d2122e;
+  --red-dark: #a80e24;
+  --green: #0b6b3a;
+  --green-dark: #084d2a;
+  --gold: #f2b705;
+  --ink: #14171a;
+  --ink-soft: #2a2f36;
+  --muted: #5b6470;
+  --line: #e6e8eb;
+  --bg: #f6f7f8;
+  --white: #fff;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 8px 30px rgba(16, 24, 40, .08);
+  --shadow-lg: 0 18px 44px rgba(16, 24, 40, .16);
+  --maxw: 1180px;
+  --header-h: 72px;
+
+  --font-head: "Montserrat", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- 2. Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+}
+main { flex: 1 0 auto; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.2; margin: 0 0 .5em; }
+p { margin: 0 0 1em; }
+ul { margin: 0; padding: 0; list-style: none; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 2000;
+  background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 8px;
+  text-decoration: none; font-weight: 600; transition: top .2s;
+}
+.skip-link:focus { top: 12px; }
+
+.container { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: 20px; }
+.section { padding-block: 64px; }
+.section--white { background: var(--white); }
+.section--dark { background: var(--ink); color: #fff; }
+
+.section__head { text-align: center; max-width: 680px; margin: 0 auto 40px; }
+.eyebrow {
+  display: inline-block; font-family: var(--font-head); font-size: .75rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+}
+.section--dark .eyebrow { color: var(--gold); }
+.section__head h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; }
+.section__head p { color: var(--muted); margin: 0; }
+.section--dark .section__head p { color: #b9c0c9; }
+.divider { width: 56px; height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--red), var(--gold)); margin: 14px auto 18px; }
+
+/* ---------- 3. Boutons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 14px 28px; border: 2px solid transparent; border-radius: 999px;
+  font-family: var(--font-head); font-size: .85rem; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; text-decoration: none; cursor: pointer;
+  transition: transform .2s, background .2s, color .2s, border-color .2s, box-shadow .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--primary { background: var(--red); color: #fff; box-shadow: 0 8px 20px rgba(210, 18, 46, .3); }
+.btn--primary:hover { background: var(--red-dark); }
+.btn--gold { background: var(--gold); color: var(--ink); }
+.btn--gold:hover { background: #fff; }
+.btn--outline { border-color: currentColor; background: transparent; }
+.btn--outline:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn--light { border-color: rgba(255, 255, 255, .6); color: #fff; }
+.btn--light:hover { background: #fff; border-color: #fff; color: var(--ink); }
+.btn--sm { padding: 10px 20px; font-size: .75rem; }
+.btn--block { width: 100%; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+
+/* ---------- 4. En-tête & navigation ---------- */
+.site-header { position: sticky; top: 0; z-index: 1000; background: var(--white); box-shadow: 0 1px 0 var(--line); }
+
+.topbar { background: var(--green-dark); color: #d9efe3; font-size: .78rem; }
+.topbar__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 36px; }
+.topbar__slogan { font-weight: 600; letter-spacing: .04em; }
+.topbar__links { display: none; align-items: center; gap: 22px; }
+.topbar__links a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+.topbar__links a:hover { color: var(--gold); }
+.topbar svg { width: 14px; height: 14px; }
+
+.navbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: var(--header-h); position: relative; }
+.brand { display: flex; align-items: center; flex: none; }
+.brand img { height: 52px; width: auto; }
+
+.nav-toggle {
+  display: inline-flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  width: 46px; height: 46px; padding: 0; background: var(--bg); border: 1px solid var(--line);
+  border-radius: 12px; cursor: pointer;
+}
+.nav-toggle .bar { width: 22px; height: 2.5px; background: var(--ink); border-radius: 2px; transition: transform .25s, opacity .25s; }
+.nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* Mobile : panneau déroulant */
+.nav {
+  display: none; position: absolute; top: 100%; left: 0; right: 0;
+  background: var(--white); border-top: 1px solid var(--line); box-shadow: var(--shadow-lg);
+  padding: 12px 20px 22px; max-height: calc(100vh - var(--header-h) - 40px); overflow-y: auto;
+}
+.nav.is-open { display: block; }
+.nav__list { display: flex; flex-direction: column; }
+.nav__link {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 13px 4px; font-family: var(--font-head); font-size: .85rem; font-weight: 700;
+  letter-spacing: .05em; text-transform: uppercase; text-decoration: none; color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.nav__link:hover, .nav__link[aria-current="page"] { color: var(--red); }
+.nav__link .caret { width: 10px; height: 10px; flex: none; transition: transform .2s; }
+.subnav { display: flex; flex-direction: column; padding: 4px 0 8px 14px; border-left: 3px solid var(--gold); margin: 8px 0 8px 4px; }
+.subnav a { padding: 9px 8px; font-size: .92rem; font-weight: 500; text-decoration: none; border-radius: 8px; }
+.subnav a:hover, .subnav a[aria-current="page"] { color: var(--red); background: var(--bg); }
+.nav__cta { margin-top: 18px; display: flex; }
+.nav__cta .btn { flex: 1; }
+
+/* Desktop */
+@media (min-width: 960px) {
+  .topbar__links { display: flex; }
+  .nav-toggle { display: none; }
+  .nav {
+    display: flex; position: static; background: none; border: 0; box-shadow: none;
+    padding: 0; max-height: none; overflow: visible; align-items: center; gap: 12px; flex: 1; justify-content: flex-end;
+  }
+  .nav__list { flex-direction: row; align-items: center; gap: 4px; }
+  .nav__item { position: relative; }
+  .nav__link { padding: 10px 14px; font-size: .78rem; border: 0; border-radius: 10px; }
+  .nav__link:hover { background: var(--bg); }
+  .nav__link[aria-current="page"] { background: rgba(210, 18, 46, .08); }
+  .has-sub:hover > .nav__link .caret, .has-sub:focus-within > .nav__link .caret { transform: rotate(180deg); }
+  .subnav {
+    display: none; position: absolute; top: 100%; left: 0; min-width: 240px; margin: 0; padding: 8px;
+    background: var(--white); border: 0; border-radius: 14px; box-shadow: var(--shadow-lg);
+    animation: pop .2s ease;
+  }
+  .has-sub::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 10px; }
+  .has-sub:hover > .subnav, .has-sub:focus-within > .subnav { display: flex; }
+  .subnav a { padding: 11px 14px; }
+  .nav__cta { margin: 0 0 0 8px; }
+}
+@keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 5. Hero (accueil) ---------- */
+.hero { position: relative; display: flex; align-items: center; min-height: clamp(420px, 72vh, 640px); background: var(--ink); color: #fff; overflow: hidden; isolation: isolate; }
+.hero__slides { position: absolute; inset: 0; z-index: -2; }
+.hero__slide {
+  position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0;
+  animation: heroFade 18s infinite;
+}
+.hero__slide:nth-child(1) { animation-delay: 0s; }
+.hero__slide:nth-child(2) { animation-delay: 6s; }
+.hero__slide:nth-child(3) { animation-delay: 12s; }
+@keyframes heroFade { 0% { opacity: 0; } 6% { opacity: 1; } 33% { opacity: 1; } 40% { opacity: 0; } 100% { opacity: 0; } }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(100deg, rgba(8, 14, 12, .88) 0%, rgba(8, 14, 12, .55) 55%, rgba(8, 14, 12, .25) 100%); }
+.hero__content { max-width: 640px; padding-block: 56px; }
+.hero__badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, .3); border-radius: 999px; background: rgba(255, 255, 255, .08);
+  font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; backdrop-filter: blur(6px);
+}
+.hero__badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+.hero h1 { font-size: clamp(2rem, 6.2vw, 3.6rem); font-weight: 800; letter-spacing: -.01em; }
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero p { font-size: clamp(1rem, 2.2vw, 1.2rem); color: #e4e8ec; max-width: 540px; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+
+/* ---------- 6. Bandeau de page (pages internes) ---------- */
+.page-hero { position: relative; background: linear-gradient(135deg, var(--green-dark), var(--green)); color: #fff; padding-block: 52px 56px; overflow: hidden; isolation: isolate; }
+.page-hero::after { content: ""; position: absolute; right: -80px; top: -80px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(242, 183, 5, .28), transparent 70%); z-index: -1; }
+.page-hero .container { display: flex; flex-direction: column; gap: 6px; }
+.breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: .82rem; color: #cfe6d8; margin-bottom: 8px; }
+.breadcrumb a { text-decoration: none; }
+.breadcrumb a:hover { color: var(--gold); text-decoration: underline; }
+.breadcrumb li + li::before { content: "/"; margin-right: 8px; opacity: .5; }
+.breadcrumb { padding: 0; }
+.breadcrumb li { display: inline-flex; }
+.page-hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; margin: 0; }
+.page-hero p { margin: 8px 0 0; max-width: 620px; color: #d9efe3; font-size: 1.05rem; }
+
+/* ---------- 7. Cartes génériques ---------- */
+.cards { display: flex; flex-wrap: wrap; gap: 24px; }
+.card {
+  flex: 1 1 280px; display: flex; flex-direction: column; background: var(--white);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow);
+  transition: transform .3s, box-shadow .3s;
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.card__icon {
+  display: inline-flex; align-items: center; justify-content: center; width: 54px; height: 54px; margin-bottom: 18px;
+  border-radius: 14px; background: rgba(210, 18, 46, .08); color: var(--red);
+}
+.card__icon svg { width: 26px; height: 26px; }
+.card__icon--green { background: rgba(11, 107, 58, .1); color: var(--green); }
+.card__icon--gold { background: rgba(242, 183, 5, .18); color: #9a7200; }
+.card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.card p { color: var(--muted); margin: 0; }
+
+/* ---------- 8. Présentation (accueil) ---------- */
+.about { display: flex; flex-direction: column; gap: 36px; align-items: center; }
+.about__media { flex: 1 1 0; width: 100%; position: relative; }
+.about__media img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
+.about__badge {
+  position: absolute; right: 16px; bottom: -20px; display: flex; flex-direction: column; align-items: center;
+  padding: 14px 22px; background: var(--red); color: #fff; border-radius: 14px; box-shadow: var(--shadow-lg); text-align: center;
+}
+.about__badge strong { font-family: var(--font-head); font-size: 1.9rem; font-weight: 800; line-height: 1; }
+.about__badge span { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; }
+.about__text { flex: 1 1 0; }
+.about__text h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; }
+.about__text p { color: var(--muted); }
+.checklist { display: flex; flex-direction: column; gap: 10px; margin: 20px 0 28px; }
+.checklist li { display: flex; align-items: flex-start; gap: 12px; font-weight: 500; }
+.checklist li::before {
+  content: "✓"; flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; margin-top: 2px; border-radius: 50%; background: var(--green); color: #fff; font-size: .8rem; font-weight: 700;
+}
+@media (min-width: 860px) { .about { flex-direction: row; gap: 60px; } }
+
+/* ---------- 9. Tuiles de catégories ---------- */
+.tiles { display: flex; flex-wrap: wrap; gap: 20px; }
+.tile {
+  flex: 1 1 240px; display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius);
+  overflow: hidden; text-decoration: none; border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform .3s, box-shadow .3s;
+}
+.tile:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.tile__img { display: flex; align-items: center; justify-content: center; height: 210px; padding: 18px; background: linear-gradient(160deg, #fff, #f1f3f5); }
+.tile__img img { height: 100%; width: auto; object-fit: contain; mix-blend-mode: multiply; transition: transform .4s; }
+.tile:hover .tile__img img { transform: scale(1.07); }
+.tile__body { display: flex; flex-direction: column; gap: 4px; padding: 20px 22px 24px; border-top: 4px solid var(--accent, var(--red)); flex: 1; }
+.tile__body h3 { margin: 0; font-size: 1.1rem; font-weight: 800; }
+.tile__body p { margin: 0; color: var(--muted); font-size: .9rem; }
+.tile__more { margin-top: auto; padding-top: 12px; font-family: var(--font-head); font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent, var(--red)); }
+
+/* ---------- 10. Bandeau CTA ---------- */
+.cta { position: relative; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; padding: 48px 28px; border-radius: 24px; color: #fff; background: linear-gradient(135deg, var(--ink), #23282f); overflow: hidden; isolation: isolate; }
+.cta::before { content: ""; position: absolute; inset: auto -60px -90px auto; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(210, 18, 46, .55), transparent 70%); z-index: -1; }
+.cta h2 { margin: 0; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; }
+.cta h2 span { color: var(--gold); }
+.cta p { margin: 0; max-width: 560px; color: #c8ced6; }
+.cta__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+@media (min-width: 860px) {
+  .cta { flex-direction: row; justify-content: space-between; text-align: left; padding: 56px 60px; }
+  .cta__text { display: flex; flex-direction: column; gap: 10px; }
+}
+
+/* ---------- 11. Catalogue (page menu) ---------- */
+.catalog-banner { position: relative; display: flex; align-items: center; min-height: 300px; color: #fff; overflow: hidden; isolation: isolate; background: #000; }
+.catalog-banner__slides { position: absolute; inset: 0; z-index: -2; }
+.catalog-banner__slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: heroFade 18s infinite; }
+.catalog-banner__slides img:nth-child(1) { animation-delay: 0s; }
+.catalog-banner__slides img:nth-child(2) { animation-delay: 6s; }
+.catalog-banner__slides img:nth-child(3) { animation-delay: 12s; }
+.catalog-banner::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(0, 0, 0, .78), rgba(0, 0, 0, .35)); }
+.catalog-banner .container { padding-block: 56px; }
+.catalog-banner h1 { font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 800; margin: 0 0 6px; }
+.catalog-banner p { margin: 0; font-size: 1.15rem; color: var(--gold); }
+
+/* ---------- 12. Pages produits ---------- */
+.tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
+.tab {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--white); font-family: var(--font-head); font-size: .8rem; font-weight: 700; letter-spacing: .03em; text-decoration: none; transition: .2s;
+}
+.tab:hover { border-color: var(--red); color: var(--red); }
+.tab[aria-current="page"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+.products { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
+.product {
+  flex: 1 1 250px; max-width: 360px; display: flex; flex-direction: column; background: var(--white);
+  border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: transform .3s, box-shadow .3s;
+}
+.product:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.product__media { position: relative; display: flex; align-items: center; justify-content: center; height: 270px; padding: 24px; background: radial-gradient(circle at 50% 40%, #fff 0%, #f1f3f5 100%); }
+.product__media img { height: 100%; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; transition: transform .4s; }
+.product:hover .product__media img { transform: scale(1.06) rotate(-1.5deg); }
+.product__tag { position: absolute; top: 14px; left: 14px; padding: 5px 12px; border-radius: 999px; background: var(--ink); color: #fff; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.product__body { display: flex; flex-direction: column; flex: 1; gap: 14px; padding: 22px 24px 26px; border-top: 4px solid var(--accent, var(--red)); }
+.product__name { margin: 0; font-size: 1.3rem; font-weight: 800; text-transform: uppercase; }
+.product__meta { margin: -8px 0 0; color: var(--muted); font-size: .88rem; }
+.product__footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--line); }
+.price { display: flex; flex-direction: column; line-height: 1.1; }
+.price small { font-size: .68rem; font-weight: 700; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+.price strong { font-family: var(--font-head); font-size: 1.55rem; font-weight: 800; color: var(--red); }
+.price strong span { margin-left: 3px; font-size: .8rem; font-weight: 700; }
+
+.page-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 48px; }
+.notice { margin: 32px auto 0; max-width: 680px; padding: 14px 18px; border-left: 4px solid var(--gold); border-radius: 8px; background: #fff8e1; color: #6b5200; font-size: .88rem; text-align: left; }
+
+/* ---------- 13. Livraison / formulaire ---------- */
+.order { display: flex; flex-direction: column; gap: 28px; align-items: stretch; }
+.panel { background: var(--white); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 28px; }
+.panel h2 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 12px; }
+.panel h2 .step { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; flex: none; border-radius: 50%; background: var(--red); color: #fff; font-size: .85rem; }
+.panel__hint { color: var(--muted); font-size: .88rem; margin-bottom: 18px; }
+.panel + .panel { margin-top: 0; }
+
+.form-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.field { flex: 1 1 220px; display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.field label { font-size: .82rem; font-weight: 600; }
+.field input, .field textarea {
+  width: 100%; padding: 13px 14px; border: 1px solid #d5d9de; border-radius: var(--radius-sm); background: #fafbfc;
+  font: inherit; color: var(--ink); transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--green); background: #fff; box-shadow: 0 0 0 4px rgba(11, 107, 58, .12); }
+.field input:user-invalid, .field textarea:user-invalid { border-color: var(--red); }
+.field textarea { resize: vertical; min-height: 90px; }
+
+.order-list { display: flex; flex-direction: column; }
+.order-group { margin: 6px 0 4px; padding: 14px 0 6px; font-family: var(--font-head); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.order-item { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.order-item__thumb { flex: none; display: flex; align-items: center; justify-content: center; width: 54px; height: 64px; background: #f1f3f5; border-radius: 10px; }
+.order-item__thumb img { height: 52px; width: auto; mix-blend-mode: multiply; }
+.order-item__info { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+.order-item__info strong { font-size: .95rem; }
+.order-item__info span { font-size: .8rem; color: var(--muted); }
+.qty { flex: none; display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; background: #fafbfc; }
+.qty button { width: 36px; height: 36px; border: 0; background: none; font-size: 1.2rem; font-weight: 700; cursor: pointer; border-radius: 50%; }
+.qty button:hover { background: var(--line); }
+.qty input { width: 40px; border: 0; background: none; text-align: center; font: inherit; font-weight: 700; -moz-appearance: textfield; padding: 0; }
+.qty input::-webkit-outer-spin-button, .qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.summary { background: #fffdf4; border: 2px dashed var(--gold); border-radius: 14px; padding: 18px 20px; margin-bottom: 8px; }
+.summary__line { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; font-size: .95rem; }
+.summary__line--total { margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(0, 0, 0, .1); font-family: var(--font-head); font-size: 1.15rem; font-weight: 800; }
+.summary__line--total span:last-child { color: var(--red); }
+
+.pay { display: flex; flex-wrap: wrap; gap: 12px; }
+.pay input { position: absolute; opacity: 0; pointer-events: none; }
+.pay label {
+  flex: 1 1 88px; display: flex; align-items: center; justify-content: center; padding: 16px 8px;
+  border: 2px solid var(--line); border-bottom: 4px solid var(--c); border-radius: 12px; background: #fff;
+  font-weight: 700; cursor: pointer; transition: .2s;
+}
+.pay label:hover { transform: translateY(-2px); }
+.pay input:checked + label { border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, white); }
+.pay input:focus-visible + label { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.alert { display: none; align-items: center; gap: 12px; margin-top: 16px; padding: 14px 18px; border-radius: 12px; font-weight: 600; }
+.alert svg { width: 20px; height: 20px; flex: none; }
+.alert.is-visible { display: flex; animation: pop .3s ease; }
+.alert--ok { background: #e8f5e9; color: #1b5e20; border: 1px solid #c8e6c9; }
+.alert--err { background: #fdecea; color: #8a1c14; border: 1px solid #f5c6c0; }
+
+@media (min-width: 980px) {
+  .order { flex-direction: row; align-items: flex-start; }
+  .order__main { flex: 1 1 0; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .order__side { flex: 0 0 380px; position: sticky; top: calc(var(--header-h) + 56px); display: flex; flex-direction: column; gap: 24px; }
+}
+@media (max-width: 979px) { .order__main, .order__side { display: flex; flex-direction: column; gap: 24px; } }
+@media (max-width: 420px) { .panel { padding: 22px 18px; } .order-item { flex-wrap: wrap; } }
+
+/* ---------- 14. Contact ---------- */
+.info-cards { display: flex; flex-wrap: wrap; gap: 24px; }
+.info-card { flex: 1 1 260px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 30px; background: var(--white); border: 1px solid var(--line); border-bottom: 5px solid var(--gold); border-radius: var(--radius); box-shadow: var(--shadow); transition: transform .3s, box-shadow .3s; }
+.info-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.info-card--accent { border-bottom-color: var(--red); }
+.info-card h3 { margin: 0 0 6px; font-size: .95rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--red); }
+.info-card p { margin: 0; color: var(--ink-soft); }
+.info-card a { text-decoration: none; }
+.info-card a:hover { color: var(--red); text-decoration: underline; }
+
+.status {
+  display: inline-flex; align-items: center; gap: 12px; padding: 12px 24px; border-radius: 999px;
+  background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow); font-size: .85rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted);
+}
+.status__dot { position: relative; width: 12px; height: 12px; flex: none; border-radius: 50%; background: #9aa3ad; }
+.status.is-open .status__dot { background: #2ecc71; }
+.status.is-open .status__dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #2ecc71; animation: pulse 2s infinite; }
+@keyframes pulse { from { transform: scale(1); opacity: .8; } to { transform: scale(2.8); opacity: 0; } }
+.contact-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 20px; margin-top: 44px; }
+
+/* ---------- 15. Équipe (membres) ---------- */
+.team-hero { position: relative; color: #fff; background: #050505; isolation: isolate; overflow: hidden; }
+.team-hero__bg { position: absolute; inset: 0; z-index: -2; display: flex; }
+.team-hero__bg div { flex: 1; background-size: cover; background-position: center; filter: grayscale(30%) brightness(.38); }
+.team-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle at center, rgba(0, 0, 0, .1), rgba(0, 0, 0, .85)); }
+.team-hero .container { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: 64px; }
+.team-hero .eyebrow { color: var(--gold); }
+.team-hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; margin-bottom: 10px; }
+.team-hero p { max-width: 560px; color: #cfd5dc; margin: 0; }
+
+.team { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; }
+.member {
+  flex: 1 1 260px; max-width: 340px; display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 36px 26px 30px; background: var(--white); border: 1px solid var(--line); border-radius: 28px; box-shadow: var(--shadow); transition: transform .3s, box-shadow .3s;
+}
+.member:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.member__photo { width: 150px; height: 150px; margin-bottom: 20px; padding: 5px; border-radius: 50%; background: linear-gradient(45deg, var(--gold), var(--red)); }
+.member__photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 4px solid #fff; }
+.member h2 { margin: 0 0 4px; font-size: 1.15rem; font-weight: 800; letter-spacing: .02em; }
+.member__first { color: var(--muted); margin-bottom: 12px; }
+.member__tag { display: inline-block; padding: 5px 14px; margin-bottom: 14px; border-radius: 999px; background: rgba(210, 18, 46, .08); color: var(--red); font-size: .72rem; font-weight: 800; letter-spacing: .12em; }
+.member__num { width: 100%; padding: 12px; border-radius: 14px; background: var(--bg); font-size: .88rem; font-weight: 600; }
+
+/* ---------- 16. Pied de page ---------- */
+.site-footer { flex: none; background: #0d1013; color: #a9b1bb; font-size: .92rem; }
+.footer__main { display: flex; flex-wrap: wrap; gap: 40px; padding-block: 56px 40px; }
+.footer__col { flex: 1 1 200px; display: flex; flex-direction: column; gap: 10px; }
+.footer__col--brand { flex: 1.6 1 280px; }
+.footer__logo { display: inline-flex; align-self: flex-start; padding: 8px 14px; background: #fff; border-radius: 12px; }
+.footer__logo img { height: 40px; width: auto; }
+.footer__col h4 { margin: 0 0 6px; font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #fff; }
+.footer__col p { margin: 0; }
+.footer__col a { text-decoration: none; transition: color .2s, padding .2s; }
+.footer__col a:hover { color: var(--gold); padding-left: 4px; }
+.footer__bottom { border-top: 1px solid #1f242a; }
+.footer__bottom .container { display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: space-between; padding-block: 22px; text-align: center; font-size: .8rem; }
+.footer__legal { color: #7f8893; }
+@media (min-width: 760px) { .footer__bottom .container { flex-direction: row; text-align: left; } }
+
+/* ---------- 17. Responsive ajustements ---------- */
+@media (max-width: 600px) {
+  .section { padding-block: 48px; }
+  .btn { width: 100%; }
+  .hero__actions .btn, .cta__actions, .page-actions .btn { width: 100%; }
+  .cta__actions { flex-direction: column; align-self: stretch; }
+  .product__footer .btn { width: 100%; }
+  .nav__cta .btn { width: 100%; }
+  .brand img { height: 46px; }
+  .about__badge { right: 12px; }
+}
+
+/* ---------- 18. Accessibilité : réduction des animations ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .hero__slide:first-child, .catalog-banner__slides img:first-child { opacity: 1; }
+}
+
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <span class="topbar__slogan">Fièrement Malagasy depuis 1953</span>
+        <div class="topbar__links">
+          <a href="tel:+261202222200"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> +261 20 22 222 00</a>
+          <a href="mailto:contact@star.mg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> contact@star.mg</a>
+        </div>
+      </div>
+    </div>
+    <div class="container navbar">
+      <a class="brand" href="index.html" aria-label="Groupe STAR Madagascar — Accueil">
+        <img src="logo.jpg" alt="STAR Madagascar" width="130" height="52">
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Ouvrir le menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav id="primary-nav" class="nav" aria-label="Navigation principale">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="index.html">Accueil</a></li>
+          <li class="nav__item has-sub">
+            <a class="nav__link" href="menu.html" aria-current="page">Catalogue <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+            <ul class="subnav">
+            <li><a href="biere.html" aria-current="page">🍺 Bières de prestige</a></li>
+            <li><a href="boisson.html">🥤 Soft Drinks</a></li>
+            <li><a href="eau.html">💧 Eaux minérales</a></li>
+            <li><a href="energie.html">⚡ Energy Drinks</a></li>
+            </ul>
+          </li>
+          <li class="nav__item"><a class="nav__link" href="livraison.html">Livraison</a></li>
+          <li class="nav__item"><a class="nav__link" href="contact.html">Contact</a></li>
+          <li class="nav__item"><a class="nav__link" href="membre.html">Équipe</a></li>
+        </ul>
+        <div class="nav__cta"><a class="btn btn--primary btn--sm" href="livraison.html">Commander <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></a></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <section class="page-hero">
+      <div class="container">
+        <nav aria-label="Fil d'Ariane"><ul class="breadcrumb"><li><a href="index.html">Accueil</a></li><li><a href="menu.html">Catalogue</a></li><li aria-current="page">Bières de prestige</li></ul></nav>
+        <h1>Nos Bières</h1>
+        <p>Grand format — l'excellence brassicole malgache.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <nav class="tabs" aria-label="Catégories de produits">
+        <a class="tab" href="biere.html" aria-current="page">🍺 Bières</a>
+        <a class="tab" href="boisson.html">🥤 Soft Drinks</a>
+        <a class="tab" href="eau.html">💧 Eaux</a>
+        <a class="tab" href="energie.html">⚡ Energy Drinks</a>
+        </nav>
+        <div class="products">
+        <article class="product" style="--accent:#004d26">
+          <div class="product__media">
+            <span class="product__tag">50 cl</span>
+            <img src="p-beaufort.jpg" alt="Beaufort Lager — bouteille 50 cl" loading="lazy">
+          </div>
+          <div class="product__body">
+            <h2 class="product__name">Beaufort Lager</h2>
+            <p class="product__meta">Bouteille 50 cl</p>
+            <div class="product__footer">
+              <div class="price"><small>Prix</small><strong>4 000<span>Ar</span></strong></div>
+              <a class="btn btn--primary btn--sm" href="livraison.html?produit=beaufort">Commander</a>
+            </div>
+          </div>
+        </article>
+        <article class="product" style="--accent:#d32f2f">
+          <div class="product__media">
+            <span class="product__tag">65 cl</span>
+            <img src="p-thb.jpg" alt="THB Pilsener — bouteille 65 cl" loading="lazy">
+          </div>
+          <div class="product__body">
+            <h2 class="product__name">THB Pilsener</h2>
+            <p class="product__meta">Bouteille 65 cl</p>
+            <div class="product__footer">
+              <div class="price"><small>Prix</small><strong>3 800<span>Ar</span></strong></div>
+              <a class="btn btn--primary btn--sm" href="livraison.html?produit=thb">Commander</a>
+            </div>
+          </div>
+        </article>
+        <article class="product" style="--accent:#b8860b">
+          <div class="product__media">
+            <span class="product__tag">65 cl</span>
+            <img src="p-castel.jpg" alt="Castel Beer — bouteille 65 cl" loading="lazy">
+          </div>
+          <div class="product__body">
+            <h2 class="product__name">Castel Beer</h2>
+            <p class="product__meta">Bouteille 65 cl</p>
+            <div class="product__footer">
+              <div class="price"><small>Prix</small><strong>4 200<span>Ar</span></strong></div>
+              <a class="btn btn--primary btn--sm" href="livraison.html?produit=castel">Commander</a>
+            </div>
+          </div>
+        </article>
+        </div>
+      <p class="notice" role="note">L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
+        <div class="page-actions">
+          <a class="btn btn--outline" href="boisson.html">Voir les boissons gazeuses 🥤</a>
+          <a class="btn btn--primary" href="livraison.html">Commander <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__main">
+      <div class="footer__col footer__col--brand">
+        <a class="footer__logo" href="index.html"><img src="logo.jpg" alt="STAR Madagascar" width="100" height="40"></a>
+        <p>Leader de l'agroalimentaire à Madagascar depuis 1953. Nous produisons et distribuons avec passion les boissons préférées des Malgaches.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Catalogue</h4>
+        <a href="biere.html">Bières de prestige</a>
+        <a href="boisson.html">Soft Drinks</a>
+        <a href="eau.html">Eaux minérales</a>
+        <a href="energie.html">Energy Drinks</a>
+      </div>
+      <div class="footer__col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="livraison.html">Livraison</a>
+        <a href="contact.html">Contact</a>
+        <a href="membre.html">Équipe du projet</a>
+      </div>
+      <div class="footer__col">
+        <h4>Nous joindre</h4>
+        <p>Andraharo, PK 2<br>Route des Hydrocarbures<br>Antananarivo</p>
+        <a href="tel:+261202222200">+261 20 22 222 00</a>
+        <a href="mailto:contact@star.mg">contact@star.mg</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <span>&copy; <span data-year>2026</span> Groupe STAR Madagascar — Tous droits réservés.</span>
+        <span class="footer__legal">L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+/* Groupe STAR — scripts communs */
+(function () {
+  "use strict";
+
+  /* ----- Navigation mobile ----- */
+  var toggle = document.querySelector(".nav-toggle");
+  var nav = document.getElementById("primary-nav");
+
+  function setNav(open) {
+    if (!toggle || !nav) return;
+    nav.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+  }
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      setNav(toggle.getAttribute("aria-expanded") !== "true");
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setNav(false);
+    });
+    document.addEventListener("click", function (e) {
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) setNav(false);
+    });
+    nav.addEventListener("click", function (e) {
+      if (e.target.closest("a")) setNav(false);
+    });
+    window.matchMedia("(min-width: 960px)").addEventListener("change", function () {
+      setNav(false);
+    });
+  }
+
+  /* ----- Année du copyright ----- */
+  document.querySelectorAll("[data-year]").forEach(function (el) {
+    el.textContent = new Date().getFullYear();
+  });
+
+  /* ----- Statut des bureaux (heure de Madagascar, UTC+3) -----
+     Lundi-vendredi : 08h00-12h00 et 13h00-17h00 */
+  var status = document.querySelector("[data-office-status]");
+  if (status) {
+    var text = status.querySelector(".status__text");
+    var now = new Date();
+    var mg = new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 3 * 3600000);
+    var day = mg.getDay();
+    var minutes = mg.getHours() * 60 + mg.getMinutes();
+    var weekday = day >= 1 && day <= 5;
+    var open = weekday && ((minutes >= 480 && minutes < 720) || (minutes >= 780 && minutes < 1020));
+    status.classList.toggle("is-open", open);
+    text.textContent = open ? "Bureaux ouverts actuellement" : "Bureaux fermés — Lun-Ven 08h-12h / 13h-17h";
+  }
+})();
+  </script>
+</body>
+</html>
